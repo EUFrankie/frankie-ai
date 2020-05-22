@@ -1,5 +1,7 @@
 import tensorflow as tf
 from transformers import DistilBertConfig, DistilBertTokenizer, TFDistilBertModel
+import sys
+sys.path.append('..')
 from datasets.STSBenchmark import STSBenchmarkDatasetForEncoding
 import numpy as np
 
