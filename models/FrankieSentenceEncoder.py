@@ -1,8 +1,6 @@
 import tensorflow as tf
 from transformers import DistilBertConfig, DistilBertTokenizer, TFDistilBertModel
 import os, sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-from datasets.STSBenchmark import STSBenchmarkDatasetForEncoding
 import numpy as np
 
 
@@ -33,7 +31,7 @@ class PoolingLayer(tf.keras.layers.Layer):
 
 class FrankieSentenceEncoder:
 
-  def __init__(self, weights_path = './.trained_models/frankie_encoder/ec.ckpt'):
+  def __init__(self, DatasetClass, weights_path = './.trained_models/frankie_encoder/ec.ckpt'):
 
     # transformer/model parameters are hardcoded due to usage of pre-trained weights
     self.max_seq_length = 64
@@ -46,6 +44,7 @@ class FrankieSentenceEncoder:
         max_length=self.max_seq_length,
         pad_to_max_length=True
     )
+    self.dataset = DatasetClass(self.tokenizer, self.max_seq_length)
 
     self.model_config = DistilBertConfig.from_pretrained(self.model_name)
     self.model_config.output_hidden_states = False
@@ -67,8 +66,7 @@ class FrankieSentenceEncoder:
   def encode(self, senteces):
 
     batch_size = 8
-    sts_ds = STSBenchmarkDatasetForEncoding(self.tokenizer, self.max_seq_length)
-    ds_sentences = sts_ds.from_sentence_list(senteces)
+    ds_sentences = self.dataset.from_sentence_list(senteces)
 
     embeddings = []
     for step, x in enumerate(ds_sentences.batch(batch_size)):

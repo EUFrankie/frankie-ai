@@ -2,6 +2,7 @@ import unittest
 from models.FrankieSentenceEncoder import FrankieSentenceEncoder
 import numpy as np
 import tensorflow as tf
+from datasets.STSBenchmark import STSBenchmarkDatasetForEncoding
 
 class TestFrankieEncoder(unittest.TestCase):
 
@@ -13,6 +14,7 @@ class TestFrankieEncoder(unittest.TestCase):
 
   def setUp(self) -> None:
     tf.get_logger().setLevel('ERROR')
+    self.encoder = FrankieSentenceEncoder(DatasetClass=STSBenchmarkDatasetForEncoding)
 
   def test_senctences_encoding_larger_batch(self):
     sentences = [
@@ -26,8 +28,7 @@ class TestFrankieEncoder(unittest.TestCase):
       "Working on Frankie helps solving one of the pandemic challenges.",
       "Working on Frankie helps solving one of the pandemic challenges."
     ]
-    encoder = FrankieSentenceEncoder()
-    self.assertEqual(encoder.encode(sentences).shape, (9, 768))
+    self.assertEqual(self.encoder.encode(sentences).shape, (9, 768))
 
   def test_senctences_encoding_smaller_batch(self):
     sentences = [
@@ -38,8 +39,7 @@ class TestFrankieEncoder(unittest.TestCase):
       "Working on Frankie helps solving one of the pandemic challenges.",
       "Working on Frankie helps solving one of the pandemic challenges."
     ]
-    encoder = FrankieSentenceEncoder()
-    self.assertEqual(encoder.encode(sentences).shape, (6, 768))
+    self.assertEqual(self.encoder.encode(sentences).shape, (6, 768))
 
   def test_senctences_encoding_equals_batch(self):
     sentences = [
@@ -52,8 +52,7 @@ class TestFrankieEncoder(unittest.TestCase):
       "Working on Frankie helps solving one of the pandemic challenges.",
       "Working on Frankie helps solving one of the pandemic challenges.",
     ]
-    encoder = FrankieSentenceEncoder()
-    self.assertEqual(encoder.encode(sentences).shape, (8, 768))
+    self.assertEqual(self.encoder.encode(sentences).shape, (8, 768))
 
   # def tearDown(self) -> None:
   #   tf.get_logger().setLevel('INFO')
