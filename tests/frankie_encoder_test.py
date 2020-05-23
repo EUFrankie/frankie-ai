@@ -1,8 +1,8 @@
 import unittest
-from models.FrankieSentenceEncoder import FrankieSentenceEncoder
+from frankie_ai.models.FrankieSentenceEncoder import FrankieSentenceEncoder
 import numpy as np
 import tensorflow as tf
-from datasets.STSBenchmark import STSBenchmarkDatasetForEncoding
+from frankie_ai.datasets.STSBenchmark import STSBenchmarkDatasetForEncoding
 
 class TestFrankieEncoder(unittest.TestCase):
 

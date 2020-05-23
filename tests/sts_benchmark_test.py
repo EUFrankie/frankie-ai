@@ -1,5 +1,5 @@
 import unittest
-from datasets.STSBenchmark import STSBenchmarkDataset, STSBenchmarkDatasetForEncoding
+from frankie_ai.datasets.STSBenchmark import STSBenchmarkDataset, STSBenchmarkDatasetForEncoding
 from transformers import AlbertTokenizer
 import tensorflow as tf
 from transformers import DistilBertTokenizer

@@ -1,7 +1,7 @@
 import unittest
 import tensorflow as tf
-from models.AlbertForComparison import AlbertForComparison, get_albert_for_comparison
-from datasets.STSBenchmark import STSBenchmarkDataset
+from frankie_ai.models.AlbertForComparison import AlbertForComparison, get_albert_for_comparison
+from frankie_ai.datasets.STSBenchmark import STSBenchmarkDataset
 import pandas as pd
 from transformers import AlbertTokenizer
 
