@@ -27,7 +27,7 @@ setuptools.setup(
         'numpy >= 1.18.4',
         'pandas >= 1.0.3',
         'tensorflow == 2.5.1',
-        'transformers == 2.9.1'
+        'transformers == 4.30.0'
     ],
     python_requires='>=3.6',
 )
